@@ -23,16 +23,6 @@ public class FarmFacadeTest {
         assertNotNull(farmFacade);
         
         // WHAT TESTS WOULD YOU CREATE HERE TO SET UP AND TEST THE FARM FACADE?
-        farmFacade.addCat("Cat");
-        assertFalse(farmFacade.getAllAnimals().isEmpty());
-        assertEquals(farmFacade.getAllAnimals().get(0).getName(),"Cat");
-        
-        
-       
-        farmFacade.addDog("Dog");
-        assertEquals(farmFacade.getAllAnimals().get(1).getName(),"Dog");
-        
-        farmFacade.addCow("Cow");
-        assertEquals(farmFacade.getAllAnimals().get(2).getName(),"Cow");
+
     }
 }

@@ -11,6 +11,7 @@
     <bean id="Cat" class="org.solent.com504.factoryandfacade.impl.CatImpl" scope="prototype"/>
     <bean id="Cow" class="org.solent.com504.factoryandfacade.impl.CowImpl" scope="prototype"/>
     <bean id="Dog" class="org.solent.com504.factoryandfacade.impl.DogImpl" scope="prototype"/>
+    <bean id="Sheep" class="org.solent.com504.factoryandfacade.impl.SheepImpl" scope="prototype"/>
            
     <!-- singleton beans -->
     <!-- Defining a bean with singleton scope means the container creates a single instance of that bean,--> 
@@ -24,7 +25,8 @@
             <list>
                 <value>Cat</value>
                 <value>Cow</value>
-                <value>Dog</value>              
+                <value>Dog</value>
+                <value>Sheep</value>              
             </list>
         </constructor-arg>
     </bean>

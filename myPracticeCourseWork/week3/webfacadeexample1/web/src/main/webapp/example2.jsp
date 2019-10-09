@@ -28,6 +28,11 @@
 
     List<String> supportedAnimalTypes = (List<String>) session.getAttribute("supportedAnimalTypes");
 
+    // access ing request parameters
+    String animalNameStr = request.getParameter("animalName");
+    String animalTypeStr = request.getParameter("animalType");
+
+
 %>
 
 <html>
@@ -35,36 +40,59 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page Farm</title>
     </head>
+
+
+    <!-- works with http://localhost:8084/basicfacadeweb/example2.jsp?animalType=emue&animalName=Fred -->
+    <%        if (animalNameStr != null || animalTypeStr != null) {
+    %>
+    <p>create animal type= <%=animalTypeStr%> name= <%=animalNameStr%></p>
+
+    <%}
+    %>
+
+
     <body>
         <p>Page for Farm</p>
         <p>Supported Animal Types</p>
+
         <table>
             <% for (String animalType : supportedAnimalTypes) {%>
             <tr>
-                <td><%=animalType%></td>
-            </tr>
-            <%
-                }
-            %>
-        </table> 
 
-        <p>Animals on Farm</p>
-        <table>
-            <tr>
-                <th>Type</th>
-                <th>Name</th>
-                <th>Sound</th>
-            </tr>
-            <% for (Animal animal : farmFacade.getAllAnimals()) {%>
-            <tr>
-                <td><%=animal.getAnimalType()%></td>
-                <td><%=animal.getName()%></td>
-                <td><%=animal.getSound()%></td>
-            </tr>
-            <%
-                }
-            %>
-        </table> 
+            <td><button><%=animalType%></button></td>
+        </tr>
+        <%
+            }
+        %>
+    </table> 
 
-    </body>
+    <p>Animals on Farm</p>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Sound</th>
+        </tr>
+        <%
+            farmFacade.addAnimal("Dog", "Mehh");
+            farmFacade.addAnimal("Dog", "jiff");
+            farmFacade.addAnimal("Cat", "ehh");
+            farmFacade.addAnimal("Cow", "bleeh");
+        %>
+
+        <% for (Animal animal : farmFacade.getAllAnimals()) {%>
+        <tr>
+            <td><%=animal.getAnimalType()%></td>
+            <td><%=animal.getName()%></td>
+            <td><%=animal.getSound()%></td>
+        </tr>
+        <%
+
+            }
+
+
+        %>
+    </table> 
+
+</body>
 </html>
