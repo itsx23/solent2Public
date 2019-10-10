@@ -32,6 +32,8 @@
     String animalNameStr = request.getParameter("animalName");
     String animalTypeStr = request.getParameter("animalType");
 
+  farmFacade.addAnimal(animalTypeStr , animalNameStr);
+
 
 %>
 
@@ -59,40 +61,40 @@
             <% for (String animalType : supportedAnimalTypes) {%>
             <tr>
 
-            <td><button><%=animalType%></button></td>
-        </tr>
-        <%
-            }
-        %>
-    </table> 
+                <td>
+                    <form>
+                        <input type="text" name="animalName">
+                        <input type="hidden" name="animalType" value="<%=animalType%>">
+                        <button type="submit">Create <%=animalType%></button>
+                    </form>
+                </td>
+            </tr>
+            <%
+                }
+            %>
+        </table> 
 
-    <p>Animals on Farm</p>
-    <table>
-        <tr>
-            <th>Type</th>
-            <th>Name</th>
-            <th>Sound</th>
-        </tr>
-        <%
-            farmFacade.addAnimal("Dog", "Mehh");
-            farmFacade.addAnimal("Dog", "jiff");
-            farmFacade.addAnimal("Cat", "ehh");
-            farmFacade.addAnimal("Cow", "bleeh");
-        %>
+        <p>Animals on Farm</p>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Sound</th>
+            </tr>
 
-        <% for (Animal animal : farmFacade.getAllAnimals()) {%>
-        <tr>
-            <td><%=animal.getAnimalType()%></td>
-            <td><%=animal.getName()%></td>
-            <td><%=animal.getSound()%></td>
-        </tr>
-        <%
+            <% for (Animal animal : farmFacade.getAllAnimals()) {%>
+            <tr>
+                <td><%=animal.getAnimalType()%></td>
+                <td><%=animal.getName()%></td>
+                <td><%=animal.getSound()%></td>
+            </tr>
+            <%
 
-            }
+                }
 
 
-        %>
-    </table> 
+            %>
+        </table> 
 
-</body>
+    </body>
 </html>
