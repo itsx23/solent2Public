@@ -31,8 +31,11 @@
     // access ing request parameters
     String animalNameStr = request.getParameter("animalName");
     String animalTypeStr = request.getParameter("animalType");
-
-  farmFacade.addAnimal(animalTypeStr , animalNameStr);
+    
+    if (animalNameStr != null || animalTypeStr != null)
+    {
+        farmFacade.addAnimal(animalTypeStr , animalNameStr);
+    }
 
 
 %>
