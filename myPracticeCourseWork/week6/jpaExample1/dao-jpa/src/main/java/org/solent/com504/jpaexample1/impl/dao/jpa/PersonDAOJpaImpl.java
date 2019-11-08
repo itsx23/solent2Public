@@ -7,6 +7,7 @@ package org.solent.com504.jpaexample1.impl.dao.jpa;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,12 +53,21 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public void deleteById(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.getTransaction().begin();
+        Query q = entityManager.createQuery("DELETE FROM Person a WHERE a.id=:id");
+        q.setParameter("id", id);
+        q.executeUpdate();
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public Person delete(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.getTransaction().begin();
+        Query q = entityManager.createQuery("DELETE FROM Person");
+        q.setParameter("Person", person);
+        q.executeUpdate();
+        entityManager.getTransaction().commit();
+        return null;
     }
 
     @Override
@@ -69,12 +79,27 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public List<Person> findByRole(Role role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Person person = entityManager.find(Person.class, role);
+        return (List<Person>) person;
+
     }
 
     @Override
     public List<Person> findByName(String firstName, String secondName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*
+            queryString = queryString + "AND a.name LIKE :name "; //':name' ";
+            paramMap.put("name", animalTemplate.getName());
+         */
+        entityManager.getTransaction().begin();
+        Query q = entityManager.createQuery("select a FROM Person a WHERE person.firstName=:firstName");
+        q.setParameter("firstName", firstName);
+        q.executeUpdate();
+        Query q2 = entityManager.createQuery("select a FROM Person a WHERE secondName.=:secondName");
+        q.setParameter("firstName", firstName);
+        q.executeUpdate();
+        entityManager.getTransaction().commit();
+        return null;
     }
 
 }
