@@ -60,7 +60,7 @@ public class PersonDAOTest {
     @Test
     public void findByIdTest() {
         LOG.debug("start of findByIdTest()");
-        
+
         //TODO implement test
         List<Person> personList = personDao.findAll();
         assertNotNull(personList);
@@ -79,8 +79,25 @@ public class PersonDAOTest {
     @Test
     public void saveTest() {
         LOG.debug("start of saveTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
+        //
+        init();
+
+        List<Person> persons = personDao.findAll();
+        assertFalse(persons.isEmpty());
+
+        // get animal in middle of index
+        int index = persons.size() / 2;
+        Person person = persons.get(index);
+        LOG.debug("initial person index:" + index + " " + person);
+
+        // change values
+        person.setAddress("new address");
+        person.setFirstName("new first name");
+        LOG.debug("new person details " + person);
+
+        personDao.save(person);
+        Long id = person.getId();
+
         LOG.debug("end of saveTest()");
     }
 
@@ -102,24 +119,14 @@ public class PersonDAOTest {
         }
         LOG.debug("findAllTest() retrieved:" + msg);
 
-        LOG.debug("NOT IMPLEMENTED");
         LOG.debug("end of findAllTest()");
     }
 
     @Test
     public void deleteByIdTest() {
         LOG.debug("start of deleteByIdTest()");
+        //TODO implement test 
 
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
-        LOG.debug("end of deleteByIdTest()");
-    }
-
-    @Test
-    public void deleteTest() {
-        LOG.debug("start of deleteTest()");
-
-        //TODO implement test
         assertNotNull(personDao);
         init();
 
@@ -130,33 +137,82 @@ public class PersonDAOTest {
         LOG.debug("deleting " + a);
         Long id = a.getId();
 
+        personDao.deleteById(id);
+
+        LOG.debug("end of deleteByIdTest()");
+    }
+
+    @Test
+    public void deleteTest() {
+        LOG.debug("start of deleteTest()");
+        //TODO implement test (fail)
+
+        assertNotNull(personDao);
+        init(); // initialise database
+
+        List<Person> persons = personDao.findAll();
+        assertFalse(persons.isEmpty());
+
+        Person a = persons.get(0);
+        LOG.debug("deleting " + a);
+        Long id = a.getId();
+
         personDao.delete(a);
 
-        LOG.debug("NOT IMPLEMENTED");
+        Person a2 = personDao.findById(id);
+        assertNull(a2);
+
         LOG.debug("end ofdeleteTest()");
     }
 
     @Test
     public void deleteAllTest() {
         LOG.debug("start of deleteAllTest())");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
+        //
+        LOG.debug("start of deleteTest()");
+        assertNotNull(personDao);
+        init(); // initialise database
+
+        List<Person> persons = personDao.findAll();
+        assertFalse(persons.isEmpty());
+
+        personDao.deleteAll();
+
         LOG.debug("end of deleteAllTest()");
     }
 
     @Test
     public void findByRoleTest() {
         LOG.debug("start of findByIdTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
+        // 
+        List<Person> personList = personDao.findByRole(Role.PATIENT);
+        assertNotNull(personList);
+        assertTrue(!personList.isEmpty());
+        Person person1 = personList.get(0);
+        LOG.debug("person1=" + person1);
+
         LOG.debug("end of findByIdTest()");
     }
 
     @Test
     public void findByNameTest() {
         LOG.debug("start of findByNameTest()");
-        //TODO implement test
-        LOG.debug("NOT IMPLEMENTED");
+        // (fail)
+        
+        List<Person> personList = personDao.findAll();
+        assertNotNull(personList);
+       assertTrue(!personList.isEmpty());
+        Person person1 = personList.get(0);
+        String firstName=person1.getFirstName();
+        String secondName = person1.getSecondName();
+        LOG.debug("firstName=" + firstName);
+        LOG.debug("secondName=" + person1.getSecondName());
+        
+        personList = personDao.findByName(firstName, secondName);
+        Person person2 = personList.get(0);
+        LOG.debug(person1.toString() +"   "+person2.toString());
+        assertTrue(person1.toString().equals(person2.toString()));
+        
         LOG.debug("end of findByNameTest())");
 
     }

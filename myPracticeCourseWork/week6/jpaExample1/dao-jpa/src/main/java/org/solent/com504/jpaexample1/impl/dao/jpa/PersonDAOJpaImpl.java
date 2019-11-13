@@ -63,9 +63,13 @@ public class PersonDAOJpaImpl implements PersonDAO {
     @Override
     public Person delete(Person person) {
         entityManager.getTransaction().begin();
-        Query q = entityManager.createQuery("DELETE FROM Person");
-        q.setParameter("Person", person);
-        q.executeUpdate();
+        entityManager.remove(person);
+
+        // Long id = person.getId();
+        // deleteById(id);
+        // Query q = entityManager.createQuery("DELETE FROM Person where ");
+        //q.setParameter("Person", person);
+        // q.executeUpdate();
         entityManager.getTransaction().commit();
         return null;
     }
@@ -80,26 +84,26 @@ public class PersonDAOJpaImpl implements PersonDAO {
     @Override
     public List<Person> findByRole(Role role) {
 
-        Person person = entityManager.find(Person.class, role);
-        return (List<Person>) person;
+        //Person person = entityManager.find(Person.class, role); 
+        TypedQuery<Person> q = entityManager.createQuery("SELECT p FROM Person p WHERE p.role=:role", Person.class);
+        q.setParameter("role", role);
+        List<Person> personList = q.getResultList();
+
+        return personList;
 
     }
 
     @Override
     public List<Person> findByName(String firstName, String secondName) {
-        /*
-            queryString = queryString + "AND a.name LIKE :name "; //':name' ";
-            paramMap.put("name", animalTemplate.getName());
-         */
+
         entityManager.getTransaction().begin();
-        Query q = entityManager.createQuery("select a FROM Person a WHERE person.firstName=:firstName");
+        TypedQuery<Person> q = entityManager.createQuery("SELECT p FROM Person p WHERE p.firstName=:firstName AND p.secondName=:secondName", Person.class);
         q.setParameter("firstName", firstName);
-        q.executeUpdate();
-        Query q2 = entityManager.createQuery("select a FROM Person a WHERE secondName.=:secondName");
-        q.setParameter("firstName", firstName);
-        q.executeUpdate();
-        entityManager.getTransaction().commit();
-        return null;
+        q.setParameter("secondName", secondName);
+        List<Person> personList = q.getResultList();
+
+        return personList;
+
     }
 
 }
