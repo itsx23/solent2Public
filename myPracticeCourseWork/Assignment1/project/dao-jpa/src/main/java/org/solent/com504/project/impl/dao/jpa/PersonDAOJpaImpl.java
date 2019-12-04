@@ -7,6 +7,7 @@ package org.solent.com504.project.impl.dao.jpa;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,12 +53,26 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public void deleteById(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.getTransaction().begin();
+        Query q = entityManager.createQuery("DELETE FROM Person a WHERE a.id=:id");
+        q.setParameter("id", id);
+        q.executeUpdate();
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public Person delete(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        entityManager.getTransaction().begin();
+        entityManager.remove(person);
+
+        // Long id = person.getId();
+        // deleteById(id);
+        // Query q = entityManager.createQuery("DELETE FROM Person where ");
+        //q.setParameter("Person", person);
+        // q.executeUpdate();
+        entityManager.getTransaction().commit();
+        return null;
     }
 
     @Override
@@ -69,12 +84,25 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public List<Person> findByRole(Role role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Person person = entityManager.find(Person.class, role); 
+        TypedQuery<Person> q = entityManager.createQuery("SELECT p FROM Person p WHERE p.role=:role", Person.class);
+        q.setParameter("role", role);
+        List<Person> personList = q.getResultList();
+
+        return personList;
     }
 
     @Override
     public List<Person> findByName(String firstName, String secondName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        entityManager.getTransaction().begin();
+        TypedQuery<Person> q = entityManager.createQuery("SELECT p FROM Person p WHERE p.firstName=:firstName AND p.secondName=:secondName", Person.class);
+        q.setParameter("firstName", firstName);
+        q.setParameter("secondName", secondName);
+        List<Person> personList = q.getResultList();
+
+        return personList;
     }
 
 }

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.solent.com504.project.impl.dao.jpa.PersonDAOJpaImpl;
 import org.solent.com504.project.model.dao.AppointmentDAO;
 import org.solent.com504.project.model.dao.PersonDAO;
+import org.solent.com504.project.model.dto.Person;
 import org.solent.com504.project.model.service.ServiceFacade;
 
 public class ServiceFacadeImpl implements ServiceFacade {
@@ -44,5 +45,14 @@ public class ServiceFacadeImpl implements ServiceFacade {
                 + "location="+location);
          return false;
     }
+
+    @Override
+    public List<Person> findallPersons() {
+        LOG.debug("get persons called ");
+                
+        return personDao.findAll();
+        
+    }
+    
     
 }
