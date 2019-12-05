@@ -56,15 +56,20 @@
             </td>
 
 
-    </tr>
+        </tr>
 
-    <%
-            // }
-    %>
-</table> 
+        <%
+        // }
+%>
+    </table> 
     <form action="./modifyuser.jsp" method="post">
-    <button type="submit" >Add person</button>
-    
+        <input type="hidden" name="personTypeStr" value="nurse">
+        <button type="submit" >Add Nurse</button>
+    </form> 
+    <form action="./modifyuser.jsp" method="post">
+        <input type="hidden" name="personTypeStr" value="client">
+        <button type="submit" >Add Client</button>
+    </form> 
 
 </body>
 </html>

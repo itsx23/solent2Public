@@ -38,7 +38,7 @@ public class PersonDAOJpaImpl implements PersonDAO {
     @Override
     public Person save(Person person) {
         entityManager.getTransaction().begin();
-        entityManager.persist(person);  // NOTE merge(animal) differnt semantics
+        entityManager.persist(person);  // NOTE merge(person) differnt semantics
         // entityManager.flush() could be used
         entityManager.getTransaction().commit();
         return person;
@@ -62,15 +62,8 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public Person delete(Person person) {
-
         entityManager.getTransaction().begin();
         entityManager.remove(person);
-
-        // Long id = person.getId();
-        // deleteById(id);
-        // Query q = entityManager.createQuery("DELETE FROM Person where ");
-        //q.setParameter("Person", person);
-        // q.executeUpdate();
         entityManager.getTransaction().commit();
         return null;
     }
@@ -84,7 +77,7 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public List<Person> findByRole(Role role) {
-        
+
         //Person person = entityManager.find(Person.class, role); 
         TypedQuery<Person> q = entityManager.createQuery("SELECT p FROM Person p WHERE p.role=:role", Person.class);
         q.setParameter("role", role);

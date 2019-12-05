@@ -1,5 +1,6 @@
 package org.solent.com504.project.model.dto;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,37 +33,11 @@ public class Appointment {
 
     private Long id;
 
-    private Integer hr;
-
-    private Integer mth;
-
-    private Integer yr;
+    private Date date;
 
     private Integer durationMinutes;
 
-    public Integer getHr() {
-        return hr;
-    }
-
-    public void setHr(Integer hr) {
-        this.hr = hr;
-    }
-
-    public Integer getMth() {
-        return mth;
-    }
-
-    public void setMth(Integer mth) {
-        this.mth = mth;
-    }
-
-    public Integer getYr() {
-        return yr;
-    }
-
-    public void setYr(Integer yr) {
-        this.yr = yr;
-    }
+ 
 
     public String getDescripton() {
         return descripton;
@@ -96,9 +71,18 @@ public class Appointment {
         this.durationMinutes = durationMinutes;
     }
 
-    @Override
-    public String toString() {
-        return "Appointment{" + "descripton=" + descripton + ", personA=" + personA + ", personB=" + personB + ", id=" + id + ", hr=" + hr + ", mth=" + mth + ", yr=" + yr + ", durationMinutes=" + durationMinutes + '}';
+    public Date getDate() {
+        return date;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" + "descripton=" + descripton + ", personA=" + personA + ", personB=" + personB + ", id=" + id + ", date=" + date + ", durationMinutes=" + durationMinutes + '}';
+    }
+
+   
 }

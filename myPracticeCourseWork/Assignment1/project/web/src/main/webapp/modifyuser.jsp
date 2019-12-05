@@ -10,7 +10,16 @@
 <%@page import="org.solent.com504.project.model.service.ServiceFacade"%>
 <%@page import="org.solent.com504.project.impl.web.WebObjectFactory"%>
 
+<%
+     // used to place error message at top of page 
+    String errorMessage = "";
+    String message = "";
+    
+    
+    // accessing request parameters
+    String personTypeStr = request.getParameter("personTypeStr");
 
+    %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,10 +31,10 @@
         <!-- print error message if there is one -->
         <div style="color:red;"><%=errorMessage%></div>
 
-        <form action="./viewPerson.jsp" method="post">
-            <input type="hidden" name="animalType" value="<%=personTypeStr%>">
+        <form action="./modifyuser.jsp" method="post">
+            <input type="hidden" name="personType" value="<%=personTypeStr%>">
             <input type="hidden" name="action" value="addPerson">
-            Enter new Animal Name:  <input type="text" name="firstName">
+            Enter new <%=personTypeStr%> Name:  <input type="text" name="firstName">
             <button type="submit" >Create <%=personTypeStr%></button>
         </form> 
         <BR>
