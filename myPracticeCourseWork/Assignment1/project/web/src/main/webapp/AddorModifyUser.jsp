@@ -31,7 +31,7 @@
         <!-- print error message if there is one -->
         <div style="color:red;"><%=errorMessage%></div>
 
-        <form action="./modifyuser.jsp" method="post">
+        <form action="./AddorModifyUser.jsp" method="post">
             <input type="hidden" name="personType" value="<%=personTypeStr%>">
             <input type="hidden" name="action" value="addPerson">
             Enter new <%=personTypeStr%> Name:  <input type="text" name="firstName">

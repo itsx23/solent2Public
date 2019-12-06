@@ -11,6 +11,12 @@ public interface ServiceFacade {
     
     public List<Person> findallPersons();
     
+    public void deletePerson(Long id);
+    
+    public Person updatePerson(Person person);
+    
+    public Person createPerson(Person person);
+    
     
     
 }
