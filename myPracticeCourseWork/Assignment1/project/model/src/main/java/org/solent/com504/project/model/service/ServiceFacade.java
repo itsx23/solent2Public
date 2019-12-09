@@ -17,6 +17,6 @@ public interface ServiceFacade {
     
     public Person createPerson(Person person);
     
-    
+    public Person retrievePerson(Person person);
     
 }

@@ -21,4 +21,6 @@ public interface PersonDAO {
     public List<Person> findByRole(Role role);
 
     public List<Person> findByName(String firstName, String secondName);
+    
+    public List<Person> retrievePerson(Person person);
 }
