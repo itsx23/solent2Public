@@ -31,14 +31,14 @@
         <!-- print error message if there is one -->
         <div style="color:red;"><%=errorMessage%></div>
 
-        <form action="./AddorModifyUser.jsp" method="post">
+        <form action="./AddOrModifyUser.jsp" method="post">
             <input type="hidden" name="personType" value="<%=personTypeStr%>">
             <input type="hidden" name="action" value="addPerson">
             Enter new <%=personTypeStr%> Name:  <input type="text" name="firstName">
             <button type="submit" >Create <%=personTypeStr%></button>
         </form> 
         <BR>
-        <form action="./userlist.jsp">
+        <form action="./ListUser.jsp">
             <button type="submit" >Return To User List</button>
         </form> 
 
