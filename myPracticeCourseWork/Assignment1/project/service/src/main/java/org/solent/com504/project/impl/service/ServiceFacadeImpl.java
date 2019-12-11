@@ -13,14 +13,14 @@ import org.solent.com504.project.model.dto.Person;
 import org.solent.com504.project.model.service.ServiceFacade;
 
 public class ServiceFacadeImpl implements ServiceFacade {
-    
-     final static Logger LOG = LogManager.getLogger(ServiceFacadeImpl.class);
+
+    final static Logger LOG = LogManager.getLogger(ServiceFacadeImpl.class);
 
     private PersonDAO personDao = null;
 
     private AppointmentDAO appointmentDao = null;
-    
-       // used to concurently count heartbeat requests
+
+    // used to concurently count heartbeat requests
     private static AtomicInteger heartbeatRequests = new AtomicInteger();
 
     // setters for DAOs
@@ -33,46 +33,45 @@ public class ServiceFacadeImpl implements ServiceFacade {
     }
 
     // Service facade methods
-
     @Override
     public String getHeartbeat() {
-        return "heartbeat number "+heartbeatRequests.getAndIncrement()+ " "+ new Date().toString();
+        return "heartbeat number " + heartbeatRequests.getAndIncrement() + " " + new Date().toString();
     }
 
     @Override
     public boolean arrivedOnSite(String name, String location) {
-        LOG.debug("arrived on site name= "+name
-                + "location="+location);
-         return false;
+        LOG.debug("arrived on site name= " + name
+                + "location=" + location);
+        return false;
     }
 
     @Override
     public List<Person> findallPersons() {
         LOG.debug("get persons called ");
-                
+
         return personDao.findAll();
-        
+
     }
-    
+
+    @Override
     public void deletePerson(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                LOG.debug("deletePerson called id="+id);
+        personDao.deleteById(id);
     }
 
     @Override
     public Person updatePerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return personDao.updatePerson(person);
     }
 
     @Override
     public Person createPerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return personDao.save(person);
     }
 
     @Override
     public Person retrievePerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return personDao.findById(person.getId());
     }
-    
-    
-    
+
 }

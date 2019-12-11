@@ -52,7 +52,19 @@ public class PersonDAOTest {
     @Test
     public void createPersonDAOTest() {
         LOG.debug("start of createPersonDAOTest");
-        // this test simply runs the before method
+
+        Person p = new Person();
+        p.setAddress("address_");
+        p.setFirstName("firstName_");
+        p.setSecondName("secondName_");
+        p.setRole(Role.PATIENT);
+
+        LOG.debug("creating person "+p);
+        assertNull(p.getId());
+        Person p2 = personDao.save(p);
+        assertNotNull(p2.getId());
+        LOG.debug("peron added to database "+p2);
+
         LOG.debug("end of createPersonDAOTest");
     }
 
@@ -79,14 +91,14 @@ public class PersonDAOTest {
         init();
         List<Person> personList = personDao.findAll();
         assertNotNull(personList);
-        
+
         // init should insert 5 people
         assertEquals(5, personList.size());
 
         // print out result
         String msg = "";
         for (Person person : personList) {
-            msg = msg +"\n   " +  person.toString();
+            msg = msg + "\n   " + person.toString();
         }
         LOG.debug("findAllTest() retrieved:" + msg);
 

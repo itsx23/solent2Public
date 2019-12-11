@@ -97,10 +97,26 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
         return personList;
     }
+// see https://github.com/itsx23/solent2Public/blob/master/week9/webfacadeexample2-spring/dao-jpa/src/main/java/org/solent/com504/factoryandfacade/impl/dao/jpa/AnimalDaoJpaImpl.java
 
     @Override
     public List<Person> retrievePerson(Person person) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Person updatePerson(Person person) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(person);  // NOTE merge(person) differnt semantics
+        // entityManager.flush() could be used
+        entityManager.getTransaction().commit();
+        return person;
+    }
+
+    @Override
+    public Person createPerson(Person person) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

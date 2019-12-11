@@ -13,7 +13,8 @@
 
 <%
 
-    ServiceFacade serviceFacade = (ServiceFacade) session.getAttribute("serviceFacade");
+    // accessing service 
+    ServiceFacade serviceFacade = (ServiceFacade) WebObjectFactory.getServiceFacade();
 
     // get request values
     String action = (String) request.getParameter("action");
@@ -64,7 +65,7 @@
         <form action="ListUser.jsp">
             <table>
                 <tr>
-                    <th>Field</th>
+                    <th>Personal Information</th>
                     <th>Current Value</th>
                     <th>New Value</th>
                 </tr>
@@ -74,19 +75,19 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>firstname</td>
+                    <td>First Name</td>
                     <td><%=((person.getFirstName() == null) ? "" : person.getFirstName())%></td>
                     <td><input type="text" name="firstname" value ="<%=((person.getFirstName() == null) ? "" : person.getFirstName())%>"></td>
                 </tr>
                 <tr>
-                    <td>secondname</td>
+                    <td>Second Name</td>
                     <td><%=((person.getSecondName() == null) ? "" : person.getSecondName())%></td>
                     <td><input type="text" name="secondname" value ="<%=((person.getSecondName() == null) ? "" : person.getSecondName())%>"></td>
                 </tr>
                 <tr>
-                    <td>address</td>
+                    <td>Address</td>
                     <td><%=((person.getAddress() == null) ? "" : person.getAddress())%></td>
-                    <td><input type="text" name="isbn" value ="<%=((person.getAddress() == null) ? "" : person.getAddress())%>"></td>
+                    <td><input type="text" name="address" value ="<%=((person.getAddress() == null) ? "" : person.getAddress())%>"></td>
                 </tr>
             </table> 
             <BR>

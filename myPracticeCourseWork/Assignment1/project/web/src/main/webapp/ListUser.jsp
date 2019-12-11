@@ -56,9 +56,9 @@
     } else if ("createPerson".equals(action)) {
         try {
             Person personTemplate = new Person();
-            personTemplate.setFirstName("firstName");
-            personTemplate.setSecondName("secondName");
-            personTemplate.setAddress("address");
+            personTemplate.setFirstName(personFirstName);
+            personTemplate.setSecondName(personSecondName);
+            personTemplate.setAddress(personAddress);
             if (personRole == "careworker") {
                 personTemplate.setRole(Role.CAREWORKER);
             } else {
@@ -73,7 +73,7 @@
         }
     }
 
-    List<Person> personList = new ArrayList<Person>();
+    List<Person> personList = serviceFacade.findallPersons();
 %>
 
 <!DOCTYPE html>
@@ -85,11 +85,11 @@
         <h1>Person List</h1>
         <table>
             <tr>
-                <th>firstName</th>
-                <th>firstSecond</th>
-                <th>address</th>
-                <th>role</th>
-                <th></th>
+                <th>First Name</th>
+                <th>Second Name</th>
+                <th>Address</th>
+                <th>Role</th>
+                
             </tr>
             <%
                 for (Person person : personList) {

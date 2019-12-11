@@ -10,25 +10,25 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.solent.com504.project.impl.service.ServiceObjectFactoryJpaImpl;
+import org.solent.com504.project.model.dto.Person;
+import org.solent.com504.project.model.dto.Role;
 import org.solent.com504.project.model.service.ServiceFacade;
 import org.solent.com504.project.model.service.ServiceObjectFactory;
-
 
 /**
  *
  * @author gallenc
  */
 public class ServiceFacadeJpaTest {
-    
+
     ServiceObjectFactory serviceObjectFactory = null;
     ServiceFacade serviceFacade = null;
-
 
     @Before
     public void loadFactory() {
 
         serviceObjectFactory = new ServiceObjectFactoryJpaImpl();
-        
+
         serviceFacade = serviceObjectFactory.getServiceFacade();
 
     }
@@ -45,14 +45,26 @@ public class ServiceFacadeJpaTest {
     public void testGetHeartbeat() {
         System.out.println("start ServiceFacadeTest testGetHeartbeat()");
         assertNotNull(serviceFacade);
-        
+
         String heartbeat = serviceFacade.getHeartbeat();
-        System.out.println("recieved heartbeat: "+heartbeat);
+        System.out.println("recieved heartbeat: " + heartbeat);
         assertNotNull(heartbeat);
-        
+
         System.out.println("end FarmFacadeTest testGetHeartbeat()");
     }
 
+    @Test
+    public void createPersonTest() {
+        Person personTemplate = new Person();
+        personTemplate.setFirstName("firstName");
+        personTemplate.setSecondName("secondName");
+        personTemplate.setAddress("address");
+
+        personTemplate.setRole(Role.PATIENT);
+
+        Person person = serviceFacade.createPerson(personTemplate);
+        assertNotNull(person.getId());
+    }
+
     // WHAT OTEHR TESTS DO YOU NEED FOR HE SERVICE?
-    
 }

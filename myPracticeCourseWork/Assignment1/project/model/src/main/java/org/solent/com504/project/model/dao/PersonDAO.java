@@ -23,4 +23,8 @@ public interface PersonDAO {
     public List<Person> findByName(String firstName, String secondName);
     
     public List<Person> retrievePerson(Person person);
+
+    public Person updatePerson(Person person);
+    
+    public Person createPerson(Person person);
 }
