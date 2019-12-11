@@ -66,6 +66,7 @@ public class ServiceFacadeImpl implements ServiceFacade {
 
     @Override
     public Person createPerson(Person person) {
+        LOG.debug("create person called " + person);
         return personDao.save(person);
     }
 

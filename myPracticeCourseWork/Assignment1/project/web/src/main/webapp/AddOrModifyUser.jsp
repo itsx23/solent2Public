@@ -71,18 +71,18 @@
                 </tr>
                 <tr>
                     <td>Person Id</td>
-                    <td><%=person.getId()%></td>
+                    <td><%=person.getId() %></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>First Name</td>
                     <td><%=((person.getFirstName() == null) ? "" : person.getFirstName())%></td>
-                    <td><input type="text" name="firstname" value ="<%=((person.getFirstName() == null) ? "" : person.getFirstName())%>"></td>
+                    <td><input type="text" name="firstName" value ="<%=((person.getFirstName() == null) ? "" : person.getFirstName())%>"></td>
                 </tr>
                 <tr>
                     <td>Second Name</td>
                     <td><%=((person.getSecondName() == null) ? "" : person.getSecondName())%></td>
-                    <td><input type="text" name="secondname" value ="<%=((person.getSecondName() == null) ? "" : person.getSecondName())%>"></td>
+                    <td><input type="text" name="secondName" value ="<%=((person.getSecondName() == null) ? "" : person.getSecondName())%>"></td>
                 </tr>
                 <tr>
                     <td>Address</td>
