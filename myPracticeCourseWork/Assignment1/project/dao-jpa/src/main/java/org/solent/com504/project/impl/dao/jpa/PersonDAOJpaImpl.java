@@ -98,4 +98,9 @@ public class PersonDAOJpaImpl implements PersonDAO {
         return personList;
     }
 
+    @Override
+    public List<Person> retrievePerson(Person person) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

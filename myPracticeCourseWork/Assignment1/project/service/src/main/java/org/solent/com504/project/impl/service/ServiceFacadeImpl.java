@@ -67,6 +67,11 @@ public class ServiceFacadeImpl implements ServiceFacade {
     public Person createPerson(Person person) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Person retrievePerson(Person person) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

@@ -31,8 +31,8 @@
 
     if ("modifyPerson".equals(action)) {
         try {
-            Long personId = Long.parseLong(personIdReq);
-            person = serviceFacade.retrievePerson(personId);
+            personId = Integer.parseInt(personIdReq);
+            person = serviceFacade.retrievePerson(person);
         } catch (Exception e) {
             errorMessage = "problem finding person " + e.getMessage();
         }
@@ -74,19 +74,19 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>title</td>
-                    <td><%=((person.getTitle() == null) ? "" : person.getTitle())%></td>
-                    <td><input type="text" name="title" value ="<%=((person.getTitle() == null) ? "" : person.getTitle())%>"></td>
+                    <td>firstname</td>
+                    <td><%=((person.getFirstName() == null) ? "" : person.getFirstName())%></td>
+                    <td><input type="text" name="firstname" value ="<%=((person.getFirstName() == null) ? "" : person.getFirstName())%>"></td>
                 </tr>
                 <tr>
-                    <td>author</td>
-                    <td><%=((person.getAuthor() == null) ? "" : person.getAuthor())%></td>
-                    <td><input type="text" name="author" value ="<%=((person.getAuthor() == null) ? "" : person.getAuthor())%>"></td>
+                    <td>secondname</td>
+                    <td><%=((person.getSecondName() == null) ? "" : person.getSecondName())%></td>
+                    <td><input type="text" name="secondname" value ="<%=((person.getSecondName() == null) ? "" : person.getSecondName())%>"></td>
                 </tr>
                 <tr>
-                    <td>isbn</td>
-                    <td><%=((person.getIsbn() == null) ? "" : person.getIsbn())%></td>
-                    <td><input type="text" name="isbn" value ="<%=((person.getIsbn() == null) ? "" : person.getIsbn())%>"></td>
+                    <td>address</td>
+                    <td><%=((person.getAddress() == null) ? "" : person.getAddress())%></td>
+                    <td><input type="text" name="isbn" value ="<%=((person.getAddress() == null) ? "" : person.getAddress())%>"></td>
                 </tr>
             </table> 
             <BR>
