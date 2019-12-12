@@ -50,16 +50,35 @@ public class ServiceRestClientImpl implements ServiceFacade {
 
         ReplyMessage replyMessage = response.readEntity(ReplyMessage.class);
         LOG.debug("Response status=" + response.getStatus() + " ReplyMessage: " + replyMessage);
-        
-        if(replyMessage==null) return null;
-        
+
+        if (replyMessage == null) {
+            return null;
+        }
+
         return replyMessage.getDebugMessage();
 
     }
 
     @Override
     public boolean arrivedOnSite(String name, String location) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        LOG.debug("arrived on site called");
+        
+        
+        Client client = ClientBuilder.newClient(new ClientConfig().register(LoggingFilter.class));
+        WebTarget webTarget = client.target(baseUrl).path("getHeartbeat");
+
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_XML);
+        Response response = invocationBuilder.get();
+
+        ReplyMessage replyMessage = response.readEntity(ReplyMessage.class);
+        LOG.debug("Response status=" + response.getStatus() + " ReplyMessage: " + replyMessage);
+
+        if (replyMessage == null) {
+            return null;
+        }
+
+        return replyMessage.getDebugMessage();
     }
 
     @Override
@@ -91,6 +110,5 @@ public class ServiceRestClientImpl implements ServiceFacade {
     public Person retrievePersonById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
 }

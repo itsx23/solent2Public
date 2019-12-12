@@ -24,7 +24,6 @@ import org.solent.com504.project.impl.web.WebObjectFactory;
 import org.solent.com504.project.model.dto.ReplyMessage;
 import org.solent.com504.project.model.service.ServiceFacade;
 
-
 /**
  * To make the ReST interface easier to program. All of the replies are
  * contained in ReplyMessage classes but only the fields indicated are populated
@@ -72,11 +71,11 @@ public class RestService {
 
             String heartbeat = serviceFacade.getHeartbeat();
             replyMessage.setDebugMessage(heartbeat);
-            
+
             replyMessage.setCode(Response.Status.OK.getStatusCode());
-            
+
             return Response.status(Response.Status.OK).entity(replyMessage).build();
-            
+
         } catch (Exception ex) {
             LOG.error("error calling /getHeartbeat ", ex);
             ReplyMessage replyMessage = new ReplyMessage();
@@ -86,43 +85,43 @@ public class RestService {
         }
     }
 
-   /**
+    /**
      * get arrived
      *
      * http://localhost:8084/projectfacadeweb/rest/appointmentService/arrived?name=name1&location=home
      *
      * @return list of all Animals in List<String> replyMessage.getStringList()
      */
-//    @GET
-//    @Path("/arrived")
-//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-//    public Response arrived(String name, String location) {
-//        try {
-//
-//            ServiceFacade serviceFacade = WebObjectFactory.getServiceFacade();
-//            ReplyMessage replyMessage = new ReplyMessage();
-//            LOG.debug("/arrived called");
-//
-//            boolean ok = serviceFacade.arrivedOnSite(name, location);
-//            if (ok) {
-//                replyMessage.setDebugMessage("arrived on site called ok name="+name
-//                         + " location="+location);
-//            } else {
-//                 replyMessage.setDebugMessage("arrive call not successful for name="+name
-//                         + " location="+location);
-//            }
-//            
-//            replyMessage.setCode(Response.Status.OK.getStatusCode());
-//            
-//            return Response.status(Response.Status.OK).entity(replyMessage).build();
-//            
-//        } catch (Exception ex) {
-//            LOG.error("error calling /arrived ", ex);
-//            ReplyMessage replyMessage = new ReplyMessage();
-//            replyMessage.setCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-//            replyMessage.setDebugMessage("error calling /arrived " + ex.getMessage());
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(replyMessage).build();
-//        }
-//    }
+    @GET
+    @Path("/arrivedOnSite")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response arrived(String name, String location) {
+        try {
+
+            ServiceFacade serviceFacade = WebObjectFactory.getServiceFacade();
+            ReplyMessage replyMessage = new ReplyMessage();
+            LOG.debug("/arrived called");
+
+            boolean ok = serviceFacade.arrivedOnSite(name, location);
+            if (ok) {
+                replyMessage.setDebugMessage("arrived on site called ok name=" + name
+                        + " location=" + location);
+            } else {
+                replyMessage.setDebugMessage("arrive call not successful for name=" + name
+                        + " location=" + location);
+            }
+
+            replyMessage.setCode(Response.Status.OK.getStatusCode());
+
+            return Response.status(Response.Status.OK).entity(replyMessage).build();
+
+        } catch (Exception ex) {
+            LOG.error("error calling /arrived ", ex);
+            ReplyMessage replyMessage = new ReplyMessage();
+            replyMessage.setCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            replyMessage.setDebugMessage("error calling /arrived " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(replyMessage).build();
+        }
+    }
 
 }

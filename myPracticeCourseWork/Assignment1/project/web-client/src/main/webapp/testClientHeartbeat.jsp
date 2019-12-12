@@ -33,6 +33,9 @@
         errorMessage = "ERROR: page called for unknown action";
     }
 
+    
+
+
 %>
 
 <html>
@@ -51,5 +54,9 @@
 
         <p>Getting heartbeat message: <%= serviceFacade.getHeartbeat()%> (note message is auto refreshed every 20 seconds)</p>
 
+        
+        
+        
+        
     </body>
 </html>
