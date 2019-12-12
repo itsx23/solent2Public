@@ -19,4 +19,6 @@ public interface ServiceFacade {
     
     public Person retrievePerson(Person person);
     
+    public Person retrievePersonById(Long id);
+    
 }

@@ -75,4 +75,9 @@ public class ServiceFacadeImpl implements ServiceFacade {
         return personDao.findById(person.getId());
     }
 
+    @Override
+    public Person retrievePersonById(Long id) {
+        return personDao.findById(id);
+    }
+
 }

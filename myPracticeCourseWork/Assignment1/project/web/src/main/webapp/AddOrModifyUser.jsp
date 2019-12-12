@@ -27,13 +27,18 @@
     String errorMessage = "";
     String message = "";
 
-    Person person = null;
-    Integer personId = null;
+    Person person = new Person();
+    Long personId = null;
 
     if ("modifyPerson".equals(action)) {
         try {
-            personId = Integer.parseInt(personIdReq);
-            person = serviceFacade.retrievePerson(person);
+            personId = Long.parseLong(personIdReq);
+            Person person2 = serviceFacade.retrievePersonById(personId);
+            if(person!=null){
+                person=person2;
+            } else {
+                errorMessage = "problem finding person for id " + personId;
+            }
         } catch (Exception e) {
             errorMessage = "problem finding person " + e.getMessage();
         }

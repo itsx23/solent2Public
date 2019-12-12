@@ -36,19 +36,23 @@
     } else if ("modifyPerson".equals(action)) {
         try {
             Long personId = Long.parseLong(personIdReq);
-            Person personTemplate = new Person();
-            personTemplate.setId(personId);
-            personTemplate.setFirstName(personFirstName);
-            personTemplate.setSecondName(personSecondName);
-            personTemplate.setAddress(personAddress);
-            if (personRole == "careworker") {
-                personTemplate.setRole(Role.CAREWORKER);
-            } else {
-                personTemplate.setRole(Role.PATIENT);
-            }
-            Person person = serviceFacade.updatePerson(personTemplate);
-            if (person == null) {
+            Person personTemplate = serviceFacade.retrievePersonById(personId);
+            if (personTemplate == null) {
                 errorMessage = "problem modifying Person. could not find personId " + personId;
+            } else {
+                personTemplate.setId(personId);
+                personTemplate.setFirstName(personFirstName);
+                personTemplate.setSecondName(personSecondName);
+                personTemplate.setAddress(personAddress);
+                if (personRole == "careworker") {
+                    personTemplate.setRole(Role.CAREWORKER);
+                } else {
+                    personTemplate.setRole(Role.PATIENT);
+                }
+                Person person = serviceFacade.updatePerson(personTemplate);
+                if (person == null) {
+                    throw new IllegalStateException("person should not be null");
+                }
             }
         } catch (Exception e) {
             errorMessage = "problem modifying Person " + e.getMessage();
@@ -85,11 +89,12 @@
         <h1>Person List</h1>
         <table>
             <tr>
+                <th>Person ID</th>
                 <th>First Name</th>
                 <th>Second Name</th>
                 <th>Address</th>
                 <th>Role</th>
-                
+
             </tr>
             <%
                 for (Person person : personList) {
