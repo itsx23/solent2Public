@@ -61,10 +61,30 @@ public class ServiceRestClientImpl implements ServiceFacade {
 
     @Override
     public boolean arrivedOnSite(String name, String location) {
-        
+
         LOG.debug("arrived on site called");
-        
-        
+
+        Client client = ClientBuilder.newClient(new ClientConfig().register(LoggingFilter.class));
+        WebTarget webTarget = client.target(baseUrl).path("arrivedOnSite").queryParam("name", name).queryParam("location", location);
+
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_XML);
+        Response response = invocationBuilder.get();
+
+        ReplyMessage replyMessage = response.readEntity(ReplyMessage.class);
+        LOG.debug("Response status=" + response.getStatus() + " ReplyMessage: " + replyMessage);
+
+        //   if (replyMessage == null) {
+        //       return null;
+        //   }
+        //    return replyMessage.getDebugMessage();
+        return true;
+    }
+
+    @Override
+    public List<Person> findallPersons() {
+        LOG.debug("client findallPersons called");
+        List<Person> findallPersons = null;
+
         Client client = ClientBuilder.newClient(new ClientConfig().register(LoggingFilter.class));
         WebTarget webTarget = client.target(baseUrl).path("getHeartbeat");
 
@@ -74,16 +94,9 @@ public class ServiceRestClientImpl implements ServiceFacade {
         ReplyMessage replyMessage = response.readEntity(ReplyMessage.class);
         LOG.debug("Response status=" + response.getStatus() + " ReplyMessage: " + replyMessage);
 
-        if (replyMessage == null) {
-            return null;
-        }
+        findallPersons = replyMessage.getPersonList();
 
-        return replyMessage.getDebugMessage();
-    }
-
-    @Override
-    public List<Person> findallPersons() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return findallPersons;
     }
 
     @Override

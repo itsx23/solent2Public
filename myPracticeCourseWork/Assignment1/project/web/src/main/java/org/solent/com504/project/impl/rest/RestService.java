@@ -62,7 +62,7 @@ public class RestService {
     @GET
     @Path("/getHeartbeat")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response getAllAnimals() {
+    public Response getHeartbeat() {
         try {
 
             ServiceFacade serviceFacade = WebObjectFactory.getServiceFacade();
@@ -88,14 +88,14 @@ public class RestService {
     /**
      * get arrived
      *
-     * http://localhost:8084/projectfacadeweb/rest/appointmentService/arrived?name=name1&location=home
+     * http://localhost:8084/projectfacadeweb/rest/appointmentService/arrivedOnSite?name=name1&location=home
      *
      * @return list of all Animals in List<String> replyMessage.getStringList()
      */
     @GET
     @Path("/arrivedOnSite")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response arrived(String name, String location) {
+    public Response arrived(@QueryParam("name") String name, @QueryParam("location") String location) {
         try {
 
             ServiceFacade serviceFacade = WebObjectFactory.getServiceFacade();

@@ -67,4 +67,11 @@ public class ReplyMessage {
         this.appointmentList = appointmentList;
     }
 
+    @Override
+    public String toString() {
+        return "ReplyMessage{" + "code=" + code + ", debugMessage=" + debugMessage + ", stringList=" + stringList + ", personList=" + personList + ", appointmentList=" + appointmentList + '}';
+    }
+    
+    
+
 }

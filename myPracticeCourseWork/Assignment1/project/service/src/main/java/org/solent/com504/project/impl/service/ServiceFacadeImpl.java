@@ -40,9 +40,10 @@ public class ServiceFacadeImpl implements ServiceFacade {
 
     @Override
     public boolean arrivedOnSite(String name, String location) {
+        
         LOG.debug("arrived on site name= " + name
                 + "location=" + location);
-        return false;
+        return true;
     }
 
     @Override
